@@ -51,7 +51,7 @@ int		print_format_string(va_list ap, t_buf *buf, char **str)
 	if (!(**str))
 		return (0);
 	init_conv(&conv);
-	get_conv_info(str, &conv);
+	get_conv_info(ap, str, &conv);
 	//print_conv(conv);
 	return (f[conv.type](ap, buf, &conv));
 }

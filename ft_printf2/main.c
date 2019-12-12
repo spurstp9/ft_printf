@@ -20,9 +20,9 @@ int	main(void)
 	int a;
 	int b;
 
-	a = ft_printf("%.8Lf", -875.000000009000000l);
+	a = ft_printf("%*d", 0, 123);
 	printf("\n");
-	b = printf("%.8Lf", -875.000000009000000l);
+	b = printf("%*d", 0, 123);
 	printf("\n");
 	return (0);
 }

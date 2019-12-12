@@ -27,7 +27,7 @@ void	init_conv(t_conv *c)
 	c->type = 0;
 }
 
-void	get_conv_info(char **str, t_conv *conv)
+void	get_conv_info(va_list ap, char **str, t_conv *conv)
 {
 	while (**str && is_conv_char(**str))
 	{
@@ -41,10 +41,10 @@ void	get_conv_info(char **str, t_conv *conv)
 			conv->space = 1;
 		else if (**str == '#')
 			conv->hashtag = 1;
-		else if (ft_isdigit(**str) && **str != '0')
-			get_width(str, conv);
+		else if (**str == '*' || (ft_isdigit(**str) && **str != '0'))
+			get_width(ap, str, conv);
 		else if (**str == '.')
-			get_prec(str, conv);
+			get_prec(ap, str, conv);
 		else if (is_lm(**str))
 			get_length(str, conv);
 		(*str)++;
@@ -54,34 +54,53 @@ void	get_conv_info(char **str, t_conv *conv)
 	set_prio_flags(conv);
 }
 
-void	get_prec(char **str, t_conv *conv)
+void	get_prec(va_list ap, char **str, t_conv *conv)
 {
 	(*str)++;
 	conv->prec = 0;
-	if (**str)
+	if (**str == '*')
+	{
+		if ((conv->prec = va_arg(ap, int)) < 0)
+			conv->prec = 0;
+	}
+	else
+	{
+		if (**str)
+		{
+			while (**str && ft_isdigit(**str))
+			{
+				conv->prec = (conv->prec * 10) + **str - '0';
+				(*str)++;
+			}
+		}
+		(*str)--;
+	}
+}
+
+void	get_width(va_list ap, char **str, t_conv *conv)
+{
+	conv->width = 0;
+	if (**str == '*')
+	{
+		if ((conv->width = va_arg(ap, int)) < 0)
+		{
+			conv->minus = 1;
+			conv->width *= -1;
+		}
+	}
+	else
 	{
 		while (**str && ft_isdigit(**str))
 		{
-			conv->prec = (conv->prec * 10) + **str - '0';
+			conv->width = (conv->width * 10) + **str - '0';
 			(*str)++;
 		}
+		(*str)--;
 	}
-	(*str)--;
 }
 
 int		is_conv_char(char c)
 {
 	return (is_lm(c) || ft_isdigit(c) || c == '.' || c == '-'
-			|| c == '#' || c == '+' || c == ' ');
-}
-
-void	get_width(char **str, t_conv *conv)
-{
-	conv->width = 0;
-	while (**str && ft_isdigit(**str))
-	{
-		conv->width = (conv->width * 10) + **str - '0';
-		(*str)++;
-	}
-	(*str)--;
+			|| c == '#' || c == '+' || c == ' ' || c == '*');
 }
