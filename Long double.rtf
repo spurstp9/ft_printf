@@ -1,0 +1,71 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
+{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww26080\viewh25480\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs72 \cf0 Double avec exposant > 0\
+
+\f1\b0\fs36 \
+Signe : 1 bit\
+\
+Exposant  : 11 bits\
+\
+Mantisse : 52 bits\
+\
+Biais : 2 ^ 10 - 1 = 1023\
+\
+Puissance minimale pour un nombre >= 1.0 : 2 ^ - 52\
+\
+       [993]                [994]                [995]                [996]                [997]                [998]                [999]\
+000
+\fs72 .
+\fs36 000 000    000 000 000    222 044 604    925 031 308    084 726 333    618 164 062    500 000 000\
+\
+Si nombre >= 1.0 :\
+	- Partie enti\'e8re = de la 1\'e8re case du tableau non nulle jusqu\'92au 3\'e8me chiffre de la 7\'e8me case en partant de la fin\
+	- Partie d\'e9cimale = 6 derni\'e8res cases en entier + 6 chiffres de la 7\'e8me case en partant de la fin\
+\
+Si nombre < 1.0\
+	- Partie enti\'e8re = 1\'e8re case du tableau\
+	- Partie d\'e9cimale = commence \'e0 la deuxi\'e8me case du tableau\
+\
+\
+
+\f0\b\fs72 Double ou long double avec un exposant < 0\
+
+\f1\b0\fs36 \
+        [0]                    [1]                   [2]                  [3]                    [4]                   [5]                  [6]\
+\
+000 000 000.   500 000 000   000 000 000   000 000 000   000 000 000   000 000 000   000 000 000
+\f0\b\fs72 \
+\
+Long double avec exposant >= 0
+\f1\b0\fs36 \
+\
+Signe : 1 bit\
+\
+Exposant : 15 bits\
+\
+Mantisse : 64 bits\
+\
+Biais = 2 ^ 14  - 1 = 16383\
+\
+
+\f0\b /!\\ pas de bit cach\'e9 !!
+\f1\b0 \
+\
+Puissance minimale pour un nombre >= 1.0 : 2 ^ - 63\
+\
+            [993]               [994]               [995]               [996]               [997]               [998]               [999]\
+\
+0.   000 000 000   000 000 000   108 420 217   248 550 443   400 745 280   086 994 171   142 578 125\
+\
+Si nombre >= 1.0 :\
+	- Partie enti\'e8re = de la 1\'e8re case du tableau non nulle jusque la 8\'e8me case du tableau en partant de la fin incluse\
+	- Partie d\'e9cimale = 7 derni\'e8res cases en entier\
+\
+Si nombre < 1.0\
+	- Partie enti\'e8re = 1\'e8re case du tableau\
+	- Partie d\'e9cimale = commence \'e0 la deuxi\'e8me case du tableau}

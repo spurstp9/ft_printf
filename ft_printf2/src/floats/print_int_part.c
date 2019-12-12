@@ -1,0 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_common.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/12 11:15:53 by agardina          #+#    #+#             */
+/*   Updated: 2019/12/12 13:26:45 by agardina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/prototypes.h"
+
+int		print_int_part(t_bigint *big, int16_t expo, int prec, t_buf *buf)
+{
+	int				res;
+	unsigned int	last_digits;
+	int				int_part_start;
+
+	if (expo < 0)
+	{
+		ft_putnbr_buf(buf, (big->tab)[0]);
+		return (1);
+	}
+	else
+	{
+		res = 0;
+		int_part_start = 0;
+		print_first_int_digits(big, &res, buf, &int_part_start);
+		if (!big->is_long)
+		{
+			last_digits = (big->tab)[BIGINT_SIZE - 7];
+			last_digits = div_by_10(last_digits, ft_min(prec, 6));
+			if (int_part_start < BIGINT_SIZE - 7)
+				put_zeros(3 - get_uint_len(last_digits), buf);
+			ft_putnbr_buf(buf, last_digits);
+			res += get_uint_len(last_digits);
+		}
+		return (res);
+	}
+}
+
+void	print_first_int_digits(t_bigint *big, int *res, t_buf *buf,
+		int *int_part_start)
+{
+	int	i;
+
+	i = 0;
+	while ((big->tab)[i] == 0)
+		i++;
+	*int_part_start = i;
+	while (i < BIGINT_SIZE - 7)
+	{
+		if (i == *int_part_start)
+			*res += get_uint_len((big->tab)[i]);
+		else
+			*res += 9;
+		if (i > *int_part_start)
+			filling_zeros(buf, (big->tab)[i]);
+		ft_putnbr_buf(buf, (big->tab)[i]);
+		i++;
+	}
+}
