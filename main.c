@@ -20,9 +20,9 @@ int	main(void)
 	int a;
 	int b;
 
-	a = ft_printf("%*d", 0, 123);
-	printf("\n");
-	b = printf("%*d", 0, 123);
-	printf("\n");
+	a = ft_printf("% 0b", 2);
+	printf("\n%d\n", a);
+	//b = printf("%*d", 0, 123);
+	//printf("\n");
 	return (0);
 }

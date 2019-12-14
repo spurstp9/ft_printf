@@ -29,6 +29,7 @@
 # define TYPE_U 7
 # define TYPE_X 8
 # define TYPE_BIG_X 9
+# define TYPE_B 10
 # define BIGINT_SIZE 1000
 # define CELL_LIMIT 999999999
 # include <stdarg.h>
@@ -48,6 +49,7 @@ int					print_s(va_list ap, t_buf *buf, t_conv *conv);
 int					print_u(va_list ap, t_buf *buf, t_conv *conv);
 int					print_x(va_list ap, t_buf *buf, t_conv *conv);
 int					print_big_x(va_list ap, t_buf *buf, t_conv *conv);
+int					print_b(va_list ap, t_buf *buf, t_conv *conv);
 
 long long int		convert_s_number(va_list ap, t_conv *conv);
 unsigned long long	convert_u_number(va_list ap, t_conv *conv);

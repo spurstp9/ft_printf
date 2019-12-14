@@ -42,9 +42,9 @@ int		ft_printf(const char *restrict format, ...)
 
 int		print_format_string(va_list ap, t_buf *buf, char **str)
 {
-	static int	(*f[10]) (va_list ap, t_buf *buf, t_conv *c) = {&print_c,
+	static int	(*f[11]) (va_list ap, t_buf *buf, t_conv *c) = {&print_c,
 		&print_d, &print_f, &print_lf, &print_o, &print_p, &print_s,
-		&print_u, &print_x, &print_big_x};
+		&print_u, &print_x, &print_big_x, &print_b};
 	t_conv		conv;
 
 	(*str)++;

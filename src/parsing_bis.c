@@ -30,6 +30,8 @@ void	get_type(char **str, t_conv *conv)
 		conv->type = TYPE_F;
 	else if (**str == 'f' && conv->f_size)
 		conv->type = TYPE_LF;
+	else if (**str == 'b')
+		conv->type = TYPE_B;
 	else if (**str == 'd' || **str == 'i')
 		conv->type = TYPE_D;
 	else

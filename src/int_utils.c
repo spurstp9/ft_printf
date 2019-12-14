@@ -55,6 +55,8 @@ int					get_convert_len(unsigned long long nb, t_conv *conv)
 
 	if (conv->type == TYPE_O)
 		len = 8;
+	else if (conv->type == TYPE_B)
+		len = 2;
 	else
 		len = 16;
 	res = 1;
