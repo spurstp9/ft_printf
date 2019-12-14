@@ -83,12 +83,15 @@ int		is_type(char c)
 
 void	set_prio_flags(t_conv *conv)
 {
-	if (conv->zero && conv->minus)
-		conv->zero = 0;
-	if (conv->space && conv->plus)
-		conv->space = 0;
-	if (conv->prec > -1 && (conv->type == TYPE_D || conv->type == TYPE_O
-				|| conv->type == TYPE_U || conv->type == TYPE_X
-				|| conv->type == TYPE_BIG_X))
-		conv->zero = 0;
+	if (conv->type != TYPE_B)
+	{
+		if (conv->zero && conv->minus)
+			conv->zero = 0;
+		if (conv->space && conv->plus)
+			conv->space = 0;
+		if (conv->prec > -1 && (conv->type == TYPE_D || conv->type == TYPE_O
+					|| conv->type == TYPE_U || conv->type == TYPE_X
+					|| conv->type == TYPE_BIG_X))
+			conv->zero = 0;
+	}
 }
