@@ -55,6 +55,7 @@ long long int		convert_s_number(va_list ap, t_conv *conv);
 unsigned long long	convert_u_number(va_list ap, t_conv *conv);
 unsigned long long	ft_abs(long long int nb);
 int					ft_printf(const char *restrict format, ...);
+void				get_color(char **str);
 int					get_convert_len(unsigned long long nb, t_conv *conv);
 void				get_conv_info(va_list ap, char **str, t_conv *conv);
 void				get_length(char **str, t_conv *conv);

@@ -82,4 +82,10 @@ typedef struct	s_bigint
 	int			is_long;
 }				t_bigint;
 
+typedef struct	s_color
+{
+	char		*name;
+	char		*format;
+}				t_color;
+
 #endif
