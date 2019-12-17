@@ -61,7 +61,7 @@ void	get_prec(va_list ap, char **str, t_conv *conv)
 	if (**str == '*')
 	{
 		if ((conv->prec = va_arg(ap, int)) < 0)
-			conv->prec = 0;
+			conv->prec = -1;
 	}
 	else
 	{
