@@ -12,7 +12,7 @@
 
 #include "../includes/prototypes.h"
 
-int		print_x(va_list ap, t_buf *buf, t_conv *conv)
+int		print_x(va_list ap, t_conv *conv)
 {
 	unsigned long long int	nb;
 	unsigned int			len;
@@ -22,23 +22,23 @@ int		print_x(va_list ap, t_buf *buf, t_conv *conv)
 	len = (!nb && !conv->prec) ? 0 : get_convert_len(nb, conv);
 	prefix_len = nb > 0 && conv->hashtag ? 2 : 0;
 	if (!conv->minus && conv->width > 0 && !conv->zero)
-		put_spaces(conv->width - ft_max(len, conv->prec) - prefix_len, buf);
-	print_u_prefix(nb, conv, buf);
+		put_spaces(conv->width - ft_max(len, conv->prec) - prefix_len, conv);
+	print_u_prefix(nb, conv);
 	if (conv->prec > -1 || conv->zero)
 	{
 		if (conv->prec > -1)
-			put_zeros(conv->prec - len, buf);
+			put_zeros(conv->prec - len, conv);
 		else
-			put_zeros(conv->width - len - prefix_len, buf);
+			put_zeros(conv->width - len - prefix_len, conv);
 	}
 	if (len)
-		ft_putnbr_base_buf(buf, nb, "0123456789abcdef");
+		ft_putnbr_base_buf(conv, nb, "0123456789abcdef");
 	if (conv->minus)
-		put_spaces(conv->width - ft_max(len, conv->prec) - prefix_len, buf);
+		put_spaces(conv->width - ft_max(len, conv->prec) - prefix_len, conv);
 	return (ft_max(ft_max(len + prefix_len, conv->prec), conv->width));
 }
 
-int		print_big_x(va_list ap, t_buf *buf, t_conv *conv)
+int		print_big_x(va_list ap, t_conv *conv)
 {
 	unsigned long long int	nb;
 	unsigned int			len;
@@ -48,18 +48,18 @@ int		print_big_x(va_list ap, t_buf *buf, t_conv *conv)
 	len = (!nb && !conv->prec) ? 0 : get_convert_len(nb, conv);
 	prefix_len = nb > 0 && conv->hashtag ? 2 : 0;
 	if (!conv->minus && conv->width > 0 && !conv->zero)
-		put_spaces(conv->width - ft_max(len, conv->prec) - prefix_len, buf);
-	print_u_prefix(nb, conv, buf);
+		put_spaces(conv->width - ft_max(len, conv->prec) - prefix_len, conv);
+	print_u_prefix(nb, conv);
 	if (conv->prec > -1 || conv->zero)
 	{
 		if (conv->prec > -1)
-			put_zeros(conv->prec - len, buf);
+			put_zeros(conv->prec - len, conv);
 		else
-			put_zeros(conv->width - len - prefix_len, buf);
+			put_zeros(conv->width - len - prefix_len, conv);
 	}
 	if (len)
-		ft_putnbr_base_buf(buf, nb, "0123456789ABCDEF");
+		ft_putnbr_base_buf(conv, nb, "0123456789ABCDEF");
 	if (conv->minus)
-		put_spaces(conv->width - ft_max(len, conv->prec) - prefix_len, buf);
+		put_spaces(conv->width - ft_max(len, conv->prec) - prefix_len, conv);
 	return (ft_max(ft_max(len + prefix_len, conv->prec), conv->width));
 }

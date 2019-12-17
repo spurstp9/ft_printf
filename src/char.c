@@ -12,7 +12,7 @@
 
 #include "../includes/prototypes.h"
 
-int	print_c(va_list ap, t_buf *buf, t_conv *conv)
+int	print_c(va_list ap, t_conv *conv)
 {
 	int c;
 	int res;
@@ -22,9 +22,9 @@ int	print_c(va_list ap, t_buf *buf, t_conv *conv)
 	else
 		c = (char)va_arg(ap, int);
 	if (!conv->minus)
-		print_padding(conv, buf, conv->width - 1);
-	putc_no_format(buf, c);
+		print_padding(conv, conv->width - 1);
+	putc_no_format(conv, c);
 	if (conv->minus)
-		print_padding(conv, buf, conv->width - 1);
+		print_padding(conv, conv->width - 1);
 	return (res = conv->width > 1 ? conv->width : 1);
 }

@@ -12,7 +12,7 @@
 
 #include "../includes/prototypes.h"
 
-int						print_u(va_list ap, t_buf *buf, t_conv *conv)
+int						print_u(va_list ap, t_conv *conv)
 {
 	unsigned long long int	nb;
 	unsigned int			len;
@@ -20,36 +20,35 @@ int						print_u(va_list ap, t_buf *buf, t_conv *conv)
 	nb = convert_u_number(ap, conv);
 	len = (!nb && !conv->prec) ? 0 : get_uint_len(nb);
 	if (!conv->minus && conv->width > 0 && !conv->zero)
-		put_spaces(conv->width - ft_max(len, conv->prec), buf);
+		put_spaces(conv->width - ft_max(len, conv->prec), conv);
 	if (conv->prec > -1 || conv->zero)
 	{
 		if (conv->prec > -1)
-			put_zeros(conv->prec - len, buf);
+			put_zeros(conv->prec - len, conv);
 		else
-			put_zeros(conv->width - len, buf);
+			put_zeros(conv->width - len, conv);
 	}
 	if (len)
-		ft_putnbr_buf(buf, nb);
+		ft_putnbr_buf(conv, nb);
 	if (conv->minus)
-		put_spaces(conv->width - ft_max(len, conv->prec), buf);
+		put_spaces(conv->width - ft_max(len, conv->prec), conv);
 	return (ft_max(ft_max(len, conv->prec), conv->width));
 }
 
-void					print_u_prefix(unsigned long long nb, t_conv *conv,
-		t_buf *buf)
+void					print_u_prefix(unsigned long long nb, t_conv *conv)
 {
 	if (conv->type == TYPE_O && conv->hashtag)
-		putc_no_format(buf, '0');
+		putc_no_format(conv, '0');
 	else if (((conv->type == TYPE_X && conv->hashtag && nb)
 				|| conv->type == TYPE_P))
 	{
-		putc_no_format(buf, '0');
-		putc_no_format(buf, 'x');
+		putc_no_format(conv, '0');
+		putc_no_format(conv, 'x');
 	}
 	else if (conv->type == TYPE_BIG_X && conv->hashtag && nb)
 	{
-		putc_no_format(buf, '0');
-		putc_no_format(buf, 'X');
+		putc_no_format(conv, '0');
+		putc_no_format(conv, 'X');
 	}
 }
 

@@ -12,7 +12,7 @@
 
 #include "../includes/prototypes.h"
 
-int		print_o(va_list ap, t_buf *buf, t_conv *conv)
+int		print_o(va_list ap, t_conv *conv)
 {
 	unsigned long long int	nb;
 	unsigned int			len;
@@ -23,18 +23,18 @@ int		print_o(va_list ap, t_buf *buf, t_conv *conv)
 		0 : get_convert_len(nb, conv);
 	prefix_len = conv->hashtag ? 1 : 0;
 	if (!conv->minus && conv->width > 0 && !conv->zero)
-		put_spaces(conv->width - ft_max(len, conv->prec) - prefix_len, buf);
-	print_u_prefix(nb, conv, buf);
+		put_spaces(conv->width - ft_max(len, conv->prec) - prefix_len, conv);
+	print_u_prefix(nb, conv);
 	if (conv->prec > -1 || conv->zero)
 	{
 		if (conv->prec > -1)
-			put_zeros(conv->prec - len - prefix_len, buf);
+			put_zeros(conv->prec - len - prefix_len, conv);
 		else
-			put_zeros(conv->width - len - prefix_len, buf);
+			put_zeros(conv->width - len - prefix_len, conv);
 	}
 	if (len)
-		ft_putnbr_base_buf(buf, nb, "01234567");
+		ft_putnbr_base_buf(conv, nb, "01234567");
 	if (conv->minus)
-		put_spaces(conv->width - ft_max(len, conv->prec) - prefix_len, buf);
+		put_spaces(conv->width - ft_max(len, conv->prec) - prefix_len, conv);
 	return (ft_max(ft_max(len + prefix_len, conv->prec), conv->width));
 }

@@ -1,6 +1,6 @@
 #include "../includes/prototypes.h"
 
-void	get_color(char **str)
+int	get_color(char **str, t_conv *conv)
 {
 	static t_color colors[17] = {{"black", "\033[30m"}, {"red", "\033[31m"},
 	{"green", "\033[32m"}, {"yellow", "\033[33m"}, {"blue", "\033[34m"},
@@ -13,12 +13,21 @@ void	get_color(char **str)
 
 	(*str)++;
 	i = 0;
-	printf("OK\n");
 	while (i < 17)
 	{
-		printf("Couleur cherchée : %s\n", colors[i].name);
 		if (ft_strnstr(*str, colors[i].name, ft_strlen(colors[i].name)))
-			printf("La couleur est : %s\n", colors[i].name);
+		{
+			return (color_found(str, colors[i], conv));
+		}
 		i++;
 	}
+	(*str)--;
+	return (0);
+}
+
+int	color_found(char **str, t_color color, t_conv *conv)
+{
+	puts_no_format(conv, color.format, ft_strlen(color.format));
+	*str += ft_strlen(color.name) + 1;
+	return (1);
 }

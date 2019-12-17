@@ -12,7 +12,7 @@
 
 #include "../includes/prototypes.h"
 
-int	print_s(va_list ap, t_buf *buf, t_conv *conv)
+int	print_s(va_list ap, t_conv *conv)
 {
 	int		len;
 	char	*str;
@@ -28,15 +28,15 @@ int	print_s(va_list ap, t_buf *buf, t_conv *conv)
 	if (!conv->minus)
 	{
 		if (!conv->zero)
-			put_spaces(conv->width - len, buf);
+			put_spaces(conv->width - len, conv);
 		else
-			put_zeros(conv->width - len, buf);
+			put_zeros(conv->width - len, conv);
 	}
 	if (!str)
-		puts_no_format(buf, "(null)", len);
+		puts_no_format(conv, "(null)", len);
 	else
-		puts_no_format(buf, str, len);
+		puts_no_format(conv, str, len);
 	if (conv->minus)
-		put_spaces(conv->width - len, buf);
+		put_spaces(conv->width - len, conv);
 	return (conv->width - len > 0 ? conv->width : len);
 }

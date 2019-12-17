@@ -14,8 +14,15 @@
 
 # define STRUCT_H
 
+typedef struct	s_buf
+{
+	int			index;
+	char		b[BUFF_SIZE + 1];
+}				t_buf;
+
 typedef struct	s_conv
 {
+	t_buf		buf;
 	char		minus;
 	char		plus;
 	char		zero;
@@ -27,13 +34,8 @@ typedef struct	s_conv
 	int			f_size;
 	char		other_char;
 	int			type;
+	int			res;
 }				t_conv;
-
-typedef struct	s_buf
-{
-	int			index;
-	char		b[BUFF_SIZE + 1];
-}				t_buf;
 
 typedef union	u_dbl_bits
 {

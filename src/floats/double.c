@@ -12,7 +12,7 @@
 
 #include "../../includes/prototypes.h"
 
-int		print_f(va_list ap, t_buf *buf, t_conv *conv)
+int		print_f(va_list ap, t_conv *conv)
 {
 	t_dbl			dbl;
 	unsigned int	len;
@@ -25,13 +25,13 @@ int		print_f(va_list ap, t_buf *buf, t_conv *conv)
 	prefix_len = (dbl.sign == 1 || conv->plus || conv->space) ? 1 : 0;
 	stock_dbl(&dbl, &big, conv->prec, &len);
 	if (!conv->minus && conv->width > 0 && !conv->zero)
-		put_spaces(conv->width - len - prefix_len, buf);
-	print_f_prefix(buf, dbl.sign, conv);
+		put_spaces(conv->width - len - prefix_len, conv);
+	print_f_prefix(conv, dbl.sign);
 	if (conv->zero)
-		put_zeros(conv->width - len - prefix_len, buf);
-	put_dbl_buffer(dbl.expo, conv, &big, buf);
+		put_zeros(conv->width - len - prefix_len, conv);
+	put_dbl_buffer(dbl.expo, conv, &big);
 	if (conv->minus)
-		put_spaces(conv->width - len - prefix_len, buf);
+		put_spaces(conv->width - len - prefix_len, conv);
 	return (ft_max(len + prefix_len, conv->width));
 }
 
@@ -72,19 +72,19 @@ void	stock_dbl(t_dbl *dbl, t_bigint *big, int prec, unsigned int *len)
 	}
 }
 
-int		put_dbl_buffer(int16_t expo, t_conv *conv, t_bigint *big, t_buf *buf)
+int		put_dbl_buffer(int16_t expo, t_conv *conv, t_bigint *big)
 {
 	if (expo >= 0)
-		return (print_big_dbl(expo, conv, big, buf));
-	return (print_small_dbl(expo, conv, big, buf));
+		return (print_big_dbl(expo, conv, big));
+	return (print_small_dbl(expo, conv, big));
 }
 
-void	print_f_prefix(t_buf *buf, int sign, t_conv *conv)
+void	print_f_prefix(t_conv *conv, int sign)
 {
 	if (!sign && conv->plus)
-		putc_no_format(buf, '+');
+		putc_no_format(conv, '+');
 	else if (!sign && conv->space)
-		putc_no_format(buf, ' ');
+		putc_no_format(conv, ' ');
 	else if (sign == 1)
-		putc_no_format(buf, '-');
+		putc_no_format(conv, '-');
 }

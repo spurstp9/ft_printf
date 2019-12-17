@@ -47,11 +47,6 @@ void	get_conv_info(va_list ap, char **str, t_conv *conv)
 			get_prec(ap, str, conv);
 		else if (is_lm(**str))
 			get_length(str, conv);
-		else if (**str == '{')
-		{
-			printf("OK\n");
-			get_color(str);
-		}
 		(*str)++;
 	}
 	if (**str)
@@ -107,5 +102,5 @@ void	get_width(va_list ap, char **str, t_conv *conv)
 int		is_conv_char(char c)
 {
 	return (is_lm(c) || ft_isdigit(c) || c == '.' || c == '-'
-			|| c == '#' || c == '+' || c == ' ' || c == '*' || c == '{');
+			|| c == '#' || c == '+' || c == ' ' || c == '*');
 }

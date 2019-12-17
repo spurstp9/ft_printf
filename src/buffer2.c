@@ -12,10 +12,10 @@
 
 #include "../includes/prototypes.h"
 
-void	print_padding(t_conv *conv, t_buf *buf, int len)
+void	print_padding(t_conv *conv, int len)
 {
 	if (conv->zero)
-		put_zeros(len, buf);
+		put_zeros(len, conv);
 	else
-		put_spaces(len, buf);
+		put_spaces(len, conv);
 }

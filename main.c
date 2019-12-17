@@ -17,6 +17,6 @@
 
 int	main(void)
 {
-	ft_printf("%{{cyan}b", 2);
+	ft_printf("Ce mot est {yelloow}%s{eoc}. Celui-ci est {green}%s.{eoc}", "jaune", "vert");
 	return (0);
 }

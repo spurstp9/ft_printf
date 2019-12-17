@@ -12,8 +12,7 @@
 
 #include "../../includes/prototypes.h"
 
-int		print_big_dbl(int16_t expo, t_conv *conv, t_bigint *big,
-	t_buf *buf)
+int		print_big_dbl(int16_t expo, t_conv *conv, t_bigint *big)
 {
 	int				res;
     unsigned int last_case_to_print;
@@ -21,15 +20,15 @@ int		print_big_dbl(int16_t expo, t_conv *conv, t_bigint *big,
     last_case_to_print = (big->tab)[big->last_dec_case];
     cut_tab(big);
     round_up_bigint(big, last_case_to_print);
-	res = print_int_part(big, expo, conv->prec, buf);
+	res = print_int_part(big, expo, conv->prec, conv);
 	if (conv->prec || conv->hashtag)
-		putc_no_format(buf, '.');
+		putc_no_format(conv, '.');
 	if (conv->prec)
-		print_dec_part(big, conv->prec, expo, buf);
+		print_dec_part(big, conv->prec, expo, conv);
 	return (res + (conv->prec > 0 ? conv->prec + 1 : 0));
 }
 
-void	print_first_dec(unsigned int nb, int *prec, int *index, t_buf *buf)
+void	print_first_dec(unsigned int nb, int *prec, int *index, t_conv *conv)
 {
 	int	i;
 	int	len;
@@ -48,8 +47,8 @@ void	print_first_dec(unsigned int nb, int *prec, int *index, t_buf *buf)
 		}
 		nb = nb % mod;
 	}
-	put_zeros(min - get_uint_len(nb), buf);
-	ft_putnbr_buf(buf, nb);
+	put_zeros(min - get_uint_len(nb), conv);
+	ft_putnbr_buf(conv, nb);
 	*prec -= min;
 	(*index)++;
 }

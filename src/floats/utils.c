@@ -52,24 +52,24 @@ void	create_unit(t_bigint *big, unsigned int size, int expo)
 	}
 }
 
-void	filling_zeros(t_buf *buf, unsigned int nb)
+void	filling_zeros(t_conv *conv, unsigned int nb)
 {
 	if (nb < 100000000)
-		putc_no_format(buf, '0');
+		putc_no_format(conv, '0');
 	if (nb < 10000000)
-		putc_no_format(buf, '0');
+		putc_no_format(conv, '0');
 	if (nb < 1000000)
-		putc_no_format(buf, '0');
+		putc_no_format(conv, '0');
 	if (nb < 100000)
-		putc_no_format(buf, '0');
+		putc_no_format(conv, '0');
 	if (nb < 10000)
-		putc_no_format(buf, '0');
+		putc_no_format(conv, '0');
 	if (nb < 1000)
-		putc_no_format(buf, '0');
+		putc_no_format(conv, '0');
 	if (nb < 100)
-		putc_no_format(buf, '0');
+		putc_no_format(conv, '0');
 	if (nb < 10)
-		putc_no_format(buf, '0');
+		putc_no_format(conv, '0');
 }
 
 int		only_nine(unsigned int nb)

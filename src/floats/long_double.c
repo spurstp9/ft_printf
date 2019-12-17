@@ -12,7 +12,7 @@
 
 #include "../../includes/prototypes.h"
 
-int		print_lf(va_list ap, t_buf *buf, t_conv *conv)
+int		print_lf(va_list ap, t_conv *conv)
 {
 	t_ldbl			ldbl;
 	unsigned int	len;
@@ -25,13 +25,13 @@ int		print_lf(va_list ap, t_buf *buf, t_conv *conv)
 	prefix_len = (ldbl.sign == 1 || conv->plus || conv->space) ? 1 : 0;
 	stock_ldbl(&ldbl, &big, conv->prec, &len);
 	if (!conv->minus && conv->width > 0 && !conv->zero)
-		put_spaces(conv->width - len - prefix_len, buf);
-	print_f_prefix(buf, ldbl.sign, conv);
+		put_spaces(conv->width - len - prefix_len, conv);
+	print_f_prefix(conv, ldbl.sign);
 	if (conv->zero)
-		put_zeros(conv->width - len - prefix_len, buf);
-	put_ldbl_buffer(ldbl.expo, &big, conv, buf);
+		put_zeros(conv->width - len - prefix_len, conv);
+	put_ldbl_buffer(ldbl.expo, &big, conv);
 	if (conv->minus)
-		put_spaces(conv->width - len - prefix_len, buf);
+		put_spaces(conv->width - len - prefix_len, conv);
 	return (ft_max(len + prefix_len, conv->width));
 }
 
@@ -64,9 +64,9 @@ void	stock_ldbl(t_ldbl *ldbl, t_bigint *big, int prec, unsigned int *len)
 	}
 }
 
-int		put_ldbl_buffer(int16_t expo, t_bigint *big, t_conv *conv, t_buf *buf)
+int		put_ldbl_buffer(int16_t expo, t_bigint *big, t_conv *conv)
 {
 	if (expo >= 0)
-		return (print_big_dbl(expo, conv, big, buf));
-	return (print_small_dbl(expo, conv, big, buf));
+		return (print_big_dbl(expo, conv, big));
+	return (print_small_dbl(expo, conv, big));
 }

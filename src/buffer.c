@@ -17,31 +17,32 @@ void	print_buffer(t_buf *buf)
 	write(1, buf->b, buf->index);
 }
 
-int		putc_no_format(t_buf *buf, char c)
+int		putc_no_format(t_conv *conv, char c)
 {
-	if (buf->index == BUFF_SIZE - 1)
+	if ((conv->buf).index == BUFF_SIZE - 1)
 	{
-		print_buffer(buf);
-		buf->index = 0;
+		print_buffer(&(conv->buf));
+		(conv->buf).index = 0;
 	}
-	buf->b[buf->index] = c;
-	(buf->index)++;
+	(conv->buf).b[(conv->buf).index] = c;
+	(conv->buf).index++;
+	conv->res++;
 	return (1);
 }
 
-void	puts_no_format(t_buf *buf, char *str, int len)
+void	puts_no_format(t_conv *conv, char *str, int len)
 {
 	int i;
 
 	i = 0;
 	while (i < len)
 	{
-		putc_no_format(buf, str[i]);
+		putc_no_format(conv, str[i]);
 		i++;
 	}
 }
 
-void	put_spaces(int nb, t_buf *buf)
+void	put_spaces(int nb, t_conv *conv)
 {
 	int count;
 
@@ -49,11 +50,11 @@ void	put_spaces(int nb, t_buf *buf)
 	if (count > 0)
 	{
 		while (count--)
-			putc_no_format(buf, ' ');
+			putc_no_format(conv, ' ');
 	}
 }
 
-void	put_zeros(int nb, t_buf *buf)
+void	put_zeros(int nb, t_conv *conv)
 {
 	int count;
 
@@ -61,6 +62,6 @@ void	put_zeros(int nb, t_buf *buf)
 	if (count > 0)
 	{
 		while (count--)
-			putc_no_format(buf, '0');
+			putc_no_format(conv, '0');
 	}
 }

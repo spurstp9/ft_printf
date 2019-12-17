@@ -15,45 +15,59 @@
 int		ft_printf(const char *restrict format, ...)
 {
 	va_list	ap;
-	t_buf	buf;
+	t_conv	conv;
 	char	*p;
-	int		res;
 
-	buf.index = 0;
-	res = 0;
+	(conv.buf).index = 0;
+	conv.res = 0;
 	p = (char *)format;
 	va_start(ap, format);
 	while (*p)
 	{
-		while (*p && *p != '%')
-		{
-			res += putc_no_format(&buf, *p);
-			p++;
-		}
-		if (*p == '%')
-		{
-			res += print_format_string(ap, &buf, &p);
-		}
+		if (*p && *p != '%')
+			print_no_format(&conv, &p);
+		if (*p && *p == '%')
+			print_format_string(ap, &conv, &p);
 	}
-	print_buffer(&buf);
+	print_buffer(&(conv.buf));
 	va_end(ap);
-	return (res);
+	return (conv.res);
 }
 
-int		print_format_string(va_list ap, t_buf *buf, char **str)
+void	print_no_format(t_conv *conv, char **str)
 {
-	static int	(*f[11]) (va_list ap, t_buf *buf, t_conv *c) = {&print_c,
+	while (**str && **str != '%')
+	{
+		if (**str != '{')
+		{
+			putc_no_format(conv, **str);
+			(*str)++;
+		}
+		else
+		{
+			if (!get_color(str, conv))
+			{
+				putc_no_format(conv, **str);
+				(*str)++;
+			}
+		}
+	}	
+}
+
+int		print_format_string(va_list ap, t_conv *conv, char **str)
+{
+	static int	(*f[11]) (va_list ap, t_conv *c) = {&print_c,
 		&print_d, &print_f, &print_lf, &print_o, &print_p, &print_s,
 		&print_u, &print_x, &print_big_x, &print_b};
-	t_conv		conv;
 
 	(*str)++;
 	if (!(**str))
 		return (0);
-	init_conv(&conv);
-	get_conv_info(ap, str, &conv);
+	init_conv(conv);
+	get_conv_info(ap, str, conv);
 	//print_conv(conv);
-	return (f[conv.type](ap, buf, &conv));
+	f[conv->type](ap, conv);
+	return (1);
 }
 
 void	print_conv(t_conv conv)

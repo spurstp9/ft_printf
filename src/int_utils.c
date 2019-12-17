@@ -30,22 +30,22 @@ unsigned long long	ft_abs(long long int nb)
 	return (nb > 0 ? nb : -nb);
 }
 
-void				ft_putnbr_buf(t_buf *buf, unsigned long long nb)
+void				ft_putnbr_buf(t_conv *conv, unsigned long long nb)
 {
 	if (nb / 10)
-		ft_putnbr_buf(buf, nb / 10);
-	putc_no_format(buf, (nb % 10) + '0');
+		ft_putnbr_buf(conv, nb / 10);
+	putc_no_format(conv, (nb % 10) + '0');
 }
 
-void				ft_putnbr_base_buf(t_buf *buf, unsigned long long nb,
+void				ft_putnbr_base_buf(t_conv *conv, unsigned long long nb,
 		char *base)
 {
 	unsigned int	len;
 
 	len = ft_strlen(base);
 	if (nb / len)
-		ft_putnbr_base_buf(buf, nb / len, base);
-	putc_no_format(buf, base[nb % len]);
+		ft_putnbr_base_buf(conv, nb / len, base);
+	putc_no_format(conv, base[nb % len]);
 }
 
 int					get_convert_len(unsigned long long nb, t_conv *conv)
