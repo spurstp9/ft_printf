@@ -17,7 +17,7 @@
 
 int	main(void)
 {
-	ft_printf("{%05.*f}\n", 15, 42.0);
-	printf("{%05.*f}\n", 15, 42.0);
+	ft_printf("%Lf\n", -100.25L / 0.0L);
+	printf("%Lf\n", -100.25L / 0.0L);
 	return (0);
 }

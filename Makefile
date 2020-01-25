@@ -25,7 +25,7 @@ LIB_HDR = $(addprefix $(LIB_HDR_FOLDER), $(LIB_HDR_FILE))
 
 SRC_FOLDER = ./src/
 SRC_FILES = bin.c buffer.c buffer2.c char.c colors.c hex.c int_utils.c loop.c oct.c \
-parsing.c parsing_bis.c pointers.c signed.c string.c unsigned.c floats/double.c \
+parsing.c parsing_bis.c pointers.c signed.c string.c unsigned.c floats/deal_inf_nan.c floats/double.c \
 floats/get_bigint_info.c floats/long_double.c floats/op.c floats/print_big_dbl.c \
 floats/print_dec_part.c floats/print_int_part.c floats/print_small_dbl.c \
 floats/round_up.c floats/store_dbl.c floats/store_ldbl.c floats/utils.c

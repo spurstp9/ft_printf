@@ -23,6 +23,8 @@ int		print_lf(va_list ap, t_conv *conv)
 	ldbl.bits.f = (long double)va_arg(ap, long double);
 	get_ld_info(&ldbl, conv, &len);
 	prefix_len = (ldbl.sign == 1 || conv->plus || conv->space) ? 1 : 0;
+	if (ldbl.expo + 16383 == 0b111111111111111)
+		return (deal_inf_nan_ldbl(conv, ldbl));
 	stock_ldbl(&ldbl, &big, conv->prec, &len);
 	if (!conv->minus && conv->width > 0 && !conv->zero)
 		put_spaces(conv->width - len - prefix_len, conv);

@@ -90,6 +90,8 @@ void				print_conv(t_conv conv);
 void				add_bigints(t_bigint *big, t_bigint *to_add);
 void				create_unit(t_bigint *big, unsigned int size, int expo);
 void				cut_tab(t_bigint *big);
+int					deal_inf_nan_dbl(t_conv *conv, t_dbl dbl);
+int					deal_inf_nan_ldbl(t_conv *conv, t_ldbl ldbl);
 void				div_bigint_by_2(t_bigint *big);
 unsigned int		div_by_10(unsigned int nb, int power);
 void				filling_zeros(t_conv *conv, unsigned int nb);
@@ -112,6 +114,7 @@ void				print_first_dec(unsigned int nb, int *prec, int *i,
 void				print_first_int_digits(t_bigint *big, int *res,
 		t_conv *conv, int *int_part_start);
 void				print_f_prefix(t_conv *conv, int sign);
+int					print_inf_nan(t_conv *conv, char *str);
 int					print_int_part(t_bigint *big, int16_t expo, int prec,
 		t_conv *conv);
 int					print_small_dbl(int16_t expo, t_conv *conv, t_bigint *big);

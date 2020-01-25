@@ -23,6 +23,8 @@ int		print_f(va_list ap, t_conv *conv)
 	dbl.bits.f = (double)va_arg(ap, double);
 	get_d_info(&dbl, conv, &len);
 	prefix_len = (dbl.sign == 1 || conv->plus || conv->space) ? 1 : 0;
+	if (dbl.expo + 1023 == 0b11111111111)
+		return (deal_inf_nan_dbl(conv, dbl));
 	stock_dbl(&dbl, &big, conv->prec, &len);
 	if (!conv->minus && conv->width > 0 && !conv->zero)
 		put_spaces(conv->width - len - prefix_len, conv);
