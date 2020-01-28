@@ -6,7 +6,7 @@
 /*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 19:29:04 by agardina          #+#    #+#             */
-/*   Updated: 2019/12/11 19:31:56 by agardina         ###   ########.fr       */
+/*   Updated: 2020/01/28 12:42:40 by agardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	print_no_format(t_conv *conv, char **str)
 				(*str)++;
 			}
 		}
-	}	
+	}
 }
 
 int		print_format_string(va_list ap, t_conv *conv, char **str)
@@ -65,7 +65,6 @@ int		print_format_string(va_list ap, t_conv *conv, char **str)
 		return (0);
 	init_conv(conv);
 	get_conv_info(ap, str, conv);
-	//print_conv(conv);
 	f[conv->type](ap, conv);
 	return (1);
 }

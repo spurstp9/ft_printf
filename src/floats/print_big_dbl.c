@@ -6,7 +6,7 @@
 /*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 20:06:14 by agardina          #+#    #+#             */
-/*   Updated: 2019/12/11 20:07:36 by agardina         ###   ########.fr       */
+/*   Updated: 2020/01/28 12:36:30 by agardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int		print_big_dbl(int16_t expo, t_conv *conv, t_bigint *big)
 {
 	int				res;
-    unsigned int last_case_to_print;
+	unsigned int	last_case_to_print;
 
-    last_case_to_print = (big->tab)[big->last_dec_case];
-    cut_tab(big);
-    round_up_bigint(big, last_case_to_print);
+	last_case_to_print = (big->tab)[big->last_dec_case];
+	cut_tab(big);
+	round_up_bigint(big, last_case_to_print);
 	res = print_int_part(big, expo, conv->prec, conv);
 	if (conv->prec || conv->hashtag)
 		putc_no_format(conv, '.');

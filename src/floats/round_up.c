@@ -6,7 +6,7 @@
 /*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 12:48:08 by agardina          #+#    #+#             */
-/*   Updated: 2019/12/12 13:15:47 by agardina         ###   ########.fr       */
+/*   Updated: 2020/01/28 12:37:19 by agardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	round_up_bigint(t_bigint *big, unsigned int last_case_to_print)
 	if (big->next_figure > 4)
 	{
 		if (get_uint_len(last_case_to_print) == 9
-            && only_nine((big->tab)[big->last_dec_case]))
+				&& only_nine((big->tab)[big->last_dec_case]))
 		{
 			(big->tab)[big->last_dec_case] = 0;
 			index = big->last_dec_case - 1;
@@ -40,7 +40,7 @@ void	get_prec_to_add(t_bigint *to_add, int index)
 
 void	cut_tab(t_bigint *big)
 {
-	int i;
+	int	i;
 
 	i = big->last_dec_case;
 	(big->tab)[i] = div_by_10((big->tab)[i], big->last_digit_rank > 0 ?

@@ -35,63 +35,12 @@ void	get_type(char **str, t_conv *conv)
 	else if (**str == 'd' || **str == 'i')
 		conv->type = TYPE_D;
 	else
-	{
-		conv->type = TYPE_C;
-		conv->other_char = **str != 'c' ? **str : 0;
-	}
+		get_c_type(str, conv);
 	(*str)++;
 }
 
-void	get_length(char **str, t_conv *conv)
+void	get_c_type(char **str, t_conv *conv)
 {
-	int	new_int_size;
-	int	new_f_size;
-
-	new_int_size = 0;
-	new_f_size = 0;
-	while (**str && is_lm(**str))
-	{
-		if (**str == 'h' && *(*str + 1) == 'h')
-			new_int_size = SIZE_HH;
-		else if (**str == 'h')
-			new_int_size = SIZE_H;
-		else if (**str == 'l' && *(*str + 1) == 'l')
-			new_int_size = SIZE_LL;
-		else if (**str == 'l')
-			new_int_size = SIZE_L;
-		else if (**str == 'L')
-			new_f_size = SIZE_LF;
-		conv->int_size = ft_max(new_int_size, conv->int_size);
-		conv->f_size = ft_max(new_f_size, conv->f_size);
-		(*str)++;
-		if (new_int_size == SIZE_HH || new_int_size == SIZE_LL)
-			(*str)++;
-	}
-	(*str)--;
-}
-
-int		is_lm(char c)
-{
-	return (c == 'h' || c == 'l' || c == 'L');
-}
-
-int		is_type(char c)
-{
-	return (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i'
-			|| c == 'o' || c == 'u' || c == 'x' || c == 'X' || c == 'f');
-}
-
-void	set_prio_flags(t_conv *conv)
-{
-	if (conv->type != TYPE_B)
-	{
-		if (conv->zero && conv->minus)
-			conv->zero = 0;
-		if (conv->space && conv->plus)
-			conv->space = 0;
-		if (conv->prec > -1 && (conv->type == TYPE_D || conv->type == TYPE_O
-					|| conv->type == TYPE_U || conv->type == TYPE_X
-					|| conv->type == TYPE_BIG_X))
-			conv->zero = 0;
-	}
+	conv->type = TYPE_C;
+	conv->other_char = **str != 'c' ? **str : 0;
 }

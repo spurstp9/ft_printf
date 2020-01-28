@@ -6,7 +6,7 @@
 /*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 14:07:34 by agardina          #+#    #+#             */
-/*   Updated: 2019/12/12 14:21:05 by agardina         ###   ########.fr       */
+/*   Updated: 2020/01/28 12:33:11 by agardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int					ft_printf(const char *restrict format, ...);
 void				ft_putnbr_base_buf(t_conv *conv, unsigned long long nb,
 		char *base);
 void				ft_putnbr_buf(t_conv *conv, unsigned long long nb);
+void				get_c_type(char **str, t_conv *conv);
 int					get_color(char **str, t_conv *conv);
 int					get_convert_len(unsigned long long nb, t_conv *conv);
 void				get_conv_info(va_list ap, char **str, t_conv *conv);
@@ -120,7 +121,8 @@ int					print_int_part(t_bigint *big, int16_t expo, int prec,
 int					print_small_dbl(int16_t expo, t_conv *conv, t_bigint *big);
 int					put_dbl_buffer(int16_t expo, t_conv *conv, t_bigint *big);
 int					put_ldbl_buffer(int16_t expo, t_bigint *big, t_conv *conv);
-void				round_up_bigint(t_bigint *big, unsigned int last_dec_to_print);
+void				round_up_bigint(t_bigint *big,
+		unsigned int last_dec_to_print);
 void				stock_dbl(t_dbl *dbl, t_bigint *big, int prec,
 		unsigned int *len);
 void				stock_ldbl(t_ldbl *ldbl, t_bigint *big, int prec,
