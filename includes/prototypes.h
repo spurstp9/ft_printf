@@ -86,8 +86,6 @@ void				put_spaces(int nb, t_conv *conv);
 void				put_zeros(int nb, t_conv *conv);
 void				set_prio_flags(t_conv *conv);
 
-void				print_conv(t_conv conv);
-
 void				add_bigints(t_bigint *big, t_bigint *to_add);
 void				create_unit(t_bigint *big, unsigned int size, int expo);
 void				cut_tab(t_bigint *big);

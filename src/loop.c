@@ -6,7 +6,7 @@
 /*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 19:29:04 by agardina          #+#    #+#             */
-/*   Updated: 2020/01/28 12:42:40 by agardina         ###   ########.fr       */
+/*   Updated: 2020/01/28 16:57:28 by agardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,4 @@ int		print_format_string(va_list ap, t_conv *conv, char **str)
 	get_conv_info(ap, str, conv);
 	f[conv->type](ap, conv);
 	return (1);
-}
-
-void	print_conv(t_conv conv)
-{
-	printf("minus : %d\n", conv.minus);
-	printf("plus : %d\n", conv.plus);
-	printf("zero : %d\n", conv.zero);
-	printf("space : %d\n", conv.space);
-	printf("hashtag : %d\n", conv.hashtag);
-	printf("width : %d\n", conv.width);
-	printf("prec : %d\n", conv.prec);
-	printf("int_size : %d\n", conv.int_size);
-	printf("float_size : %d\n", conv.f_size);
-	printf("type : %d\n", conv.type);
 }
