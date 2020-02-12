@@ -17,7 +17,9 @@
 
 int	main(void)
 {
-	ft_printf("%Lf\n", -100.25L / 0.0L);
-	printf("%Lf\n", -100.25L / 0.0L);
-	return (0);
+    int a;
+    int b;
+
+    a = printf("test %-7C %007d%-10.2ls!!", 0xd777, 0x45, 0x10);
+               b = ft_printf("test %-7C %007d%-10.2ls!!", 0xd777, 0x45, 0x10);
 }
